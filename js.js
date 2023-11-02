@@ -1,38 +1,7 @@
 let govname,capital,language,population,area,unit,system,leader;
 let govDisp = document.querySelector('.main');
-let govCount = 3;
-let allGov =  {
-    0:{
-        govname: 'russia',
-        capital: 'moscov',
-        language: 'ru',
-        population: 250,
-        area: 250,
-        unit:'ruble',
-        system:'communism',
-        leader:'putin',
-    },
-    1:{
-        govname: 'turkey',
-        capital: 'ankara',
-        language: 'tr',
-        population: 50,
-        area: 50,
-        unit:'lira',
-        system:'democracy',
-        leader:'erdogan',
-    },
-    2:{
-        govname: 'germany',
-        capital: 'berlin',
-        language: 'gr',
-        population: 250,
-        area: 250,
-        unit:'pount',
-        system:'democracy',
-        leader:'kto-to_tam',
-    },
-}
+let allGov =  [];
+    
 function dispCleaner(){
     while(govDisp.firstChild){
         govDisp.removeChild(govDisp.lastChild);
@@ -40,28 +9,19 @@ function dispCleaner(){
 }
 
 function addGov(){
-    allGov[govCount] = {
-        govname,
-        capital,
-        language,
-        population,
-        area,
-        unit,
-        system,
-        leader,
+    allGov.push({
+        govname : prompt('name'),
+        capital : prompt("Введите столицу:"),
+        language : prompt("Введите государственный язык:"),
+        population : parseInt(prompt("Введите население:")),
+        area : parseInt(prompt("Введите площадь территории:")),
+        unit : prompt("Введите денежную единицу:"),
+        system : prompt("Введите государственный строй:"),
+        leader : prompt("Введите имя главы государства:"),
+    })
+    if(allGov[allGov.length - 1].govname === '' || allGov[allGov.length - 1].govname === null){
+        delete allGov[allGov.length - 1];
     }
-    allGov[govCount].govname = prompt('name')
-    allGov[govCount].capital = prompt("Введите столицу:");
-    allGov[govCount].language = prompt("Введите государственный язык:");
-    allGov[govCount].population = parseInt(prompt("Введите население:"));
-    allGov[govCount].area = parseInt(prompt("Введите площадь территории:"));
-    allGov[govCount].unit = prompt("Введите денежную единицу:");
-    allGov[govCount].system = prompt("Введите государственный строй:");
-    allGov[govCount].leader = prompt("Введите имя главы государства:");
-    if(allGov[govCount].govname === null){
-        delete allGov[govCount];
-    }
-    govCount++;
 }
 
 function viewGov(){
@@ -113,44 +73,14 @@ function editGov(){
     let loop = true
     while(loop){
         let userChoise = prompt('change : govname, capital, language, population, area, unit, system, leader, exit');
-        switch(userChoise){
-            case 'govname':
-                choise[userChoise] = prompt('govname');
-                break;
-
-            case 'capital':
-                choise[userChoise] = prompt('capital');
-                break;
-
-            case 'language':
-                choise[userChoise] = prompt('language');
-                break;
-
-            case 'population':
-                choise[userChoise] = prompt('population');
-                break;
-
-            case 'area':
-                choise[userChoise] = prompt('area');
-                break;
-
-            case 'unit':
-                choise[userChoise] = prompt('unit');
-                break;
-
-            case 'system':
-                choise[userChoise] = prompt('system');
-                break;
-
-            case 'leader':
-                choise[userChoise] = prompt('leader');
-                break;
-            case 'exit':
-                loop = false;
-                break;
-            default:
-                alert("wrong do it again");
-                break;
+        if(userChoise == 'change' || userChoise == 'govname' || userChoise == 'capital' || userChoise == ' language' || userChoise == 'area' || userChoise == 'unit' || userChoise == 'system' || userChoise == 'leader'){
+            choise[userChoise] = prompt('');
+        }
+        else if(userChoise == 'exit'){
+            loop = false;
+        }
+        else{
+            alert("wrong do it again");
         }
     }
 }
@@ -160,9 +90,7 @@ function findGov(){
     let userChoise = prompt('find by : govname, capital, language, population, area, unit, system, leader');
     let userPrmopt = prompt('');
     for(let key in allGov){
-        if(allGov[key][userChoise] == userPrmopt){
-            ans.push(allGov[key]);
-        }
+        if(allGov[key][userChoise] == userPrmopt) ans.push(allGov[key])
     }
     return ans;
-}
+} 
